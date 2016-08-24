@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Windows.Devices.Geolocation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
