@@ -267,7 +267,10 @@
             </Grid>
         </Border>
 
-        <Grid Canvas.ZIndex="2" Visibility="{Binding IsPokemonDetailsOpen, Converter={StaticResource BoolVisibility}}">
+        <Grid Canvas.ZIndex="2" Visibility="{Binding IsPokemonDetailsOpen, Converter={StaticResource BoolVisibility}}"
+              ManipulationStarted="Grid_ManipulationStarted" 
+              ManipulationCompleted="Grid_ManipulationCompleted"
+              ManipulationMode="TranslateX">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*" />
                 <RowDefinition Height="2*" />
@@ -289,7 +292,11 @@
                 </Grid.Background>
             </Grid>
 
-            <Grid Grid.Row="0" Grid.RowSpan="2">
+            <Grid Grid.Row="0" 
+                  Grid.RowSpan="2"
+                  ManipulationStarted="Grid_ManipulationStarted" 
+                  ManipulationCompleted="Grid_ManipulationCompleted"
+                  ManipulationMode="TranslateX">
                 <Grid.Background>
                     <ImageBrush ImageSource="{Binding PokemonDetails.Type, Converter={StaticResource PokemonTypeToBackgroundConverter}}" Stretch="Fill" />
                 </Grid.Background>

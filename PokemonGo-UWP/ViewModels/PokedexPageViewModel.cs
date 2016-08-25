@@ -163,6 +163,39 @@ namespace PokemonGo_UWP.ViewModels
                     NavigationService.Navigate(typeof(GameMapPage));
             }, () => true)
             );
+        private DelegateCommand _nextPokemon, _prevPokemon;
+        public DelegateCommand NextPokemon =>
+            _nextPokemon ??
+            (_nextPokemon = new DelegateCommand(() => 
+                {
+                    int currIndex = (int)SelectedPokedexEntry.Key - 1;
+                    for (int index=currIndex + 1; index < PokemonFoundAndSeen.Count; index++)
+                    {
+                        var poke = PokemonFoundAndSeen[index];
+                        if(poke.Value!=null && poke.Value.TimesEncountered > 0)
+                        {
+                            SelectedPokedexEntry = poke;
+                            break;
+                        }
+                    }
+                })
+            );
+        public DelegateCommand PrevPokemon =>
+            _prevPokemon ??
+            (_prevPokemon = new DelegateCommand(() =>
+                {
+                    int currIndex = (int)SelectedPokedexEntry.Key - 1;
+                    for (int index = currIndex - 1; index >=0; index--)
+                    {
+                        var poke = PokemonFoundAndSeen[index];
+                        if (poke.Value != null && poke.Value.TimesEncountered > 0)
+                        {
+                            SelectedPokedexEntry = poke;
+                            break;
+                        }
+                    }
+                })
+            );
         private void PopulateEvolutions()
         {
             PokemonEvolutions.Clear();
